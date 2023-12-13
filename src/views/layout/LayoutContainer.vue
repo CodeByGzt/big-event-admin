@@ -1,9 +1,6 @@
-<script setup></script>
-
 <template>
   <div>
+    架子
     <RouterView></RouterView>
   </div>
 </template>
-
-<style scoped></style>

@@ -8,6 +8,12 @@ module.exports = {
     'eslint:recommended',
     '@vue/eslint-config-prettier/skip-formatting'
   ],
+  // 解决 ElMessage 报错问题
+  globals: {
+    ElMessage: 'readonly',
+    ElMessageBox: 'readonly',
+    ElLoading: 'readonly'
+  },
   parserOptions: {
     ecmaVersion: 'latest'
   },
