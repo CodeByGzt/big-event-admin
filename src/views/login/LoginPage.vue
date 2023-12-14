@@ -1,8 +1,11 @@
 <script setup>
 import { User, Lock } from '@element-plus/icons-vue'
-import { ref } from 'vue'
-import { userRegisterService } from '@/api/user.js'
-const isRegister = ref(true)
+import { ref, watch } from 'vue'
+import { userRegisterService, userLoginService } from '@/api/user.js'
+import { useUserStore } from '@/stores'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const isRegister = ref(false)
 //整个表单的校验规则
 // 1.非空校验required: true    message消息提示，trigger触发校验的时机blur change
 // 2.长度校验min:xx, max: XX
@@ -52,12 +55,22 @@ const rules = {
     }
   ]
 }
+// 登录
+const login = async () => {
+  await from.value.validate()
+  await userLoginService(ruleForm.value).then((res) => {
+    // 持久化
+    useUserStore().setToken(res.data)
+    ElMessage.success('登录成功！')
+    // 跳转到首页
+    router.push('/')
+  })
+}
 // 注册方法
 const register = async () => {
   await from.value.validate()
   await userRegisterService(ruleForm.value)
   ElMessage.success('注册成功！')
-  clearForm()
   // 切换登录
   isRegister.value = false
 }
@@ -65,6 +78,10 @@ const register = async () => {
 const clearForm = () => {
   from.value.resetFields()
 }
+// 监听表单数据
+watch(isRegister, () => {
+  clearForm()
+})
 </script>
 
 <template>
@@ -152,19 +169,34 @@ const clearForm = () => {
           </el-link>
         </el-form-item>
       </el-form>
-      <el-form ref="form" size="large" autocomplete="off" v-else>
+      <el-form
+        ref="from"
+        size="large"
+        autocomplete="off"
+        :model="ruleForm"
+        :rules="rules"
+        v-else
+      >
         <el-form-item>
           <h1>登录</h1>
         </el-form-item>
-        <el-form-item>
-          <el-input :prefix-icon="User" placeholder="请输入用户名"></el-input>
+        <el-form-item prop="username">
+          <el-input
+            :prefix-icon="User"
+            placeholder="请输入用户名"
+            v-model="ruleForm.username"
+            clearable
+          ></el-input>
         </el-form-item>
-        <el-form-item>
+        <el-form-item prop="password">
           <el-input
             name="password"
             :prefix-icon="Lock"
             type="password"
             placeholder="请输入密码"
+            v-model="ruleForm.password"
+            clearable
+            show-password
           ></el-input>
         </el-form-item>
         <el-form-item class="flex">
@@ -174,7 +206,11 @@ const clearForm = () => {
           </div>
         </el-form-item>
         <el-form-item>
-          <el-button class="button" type="primary" auto-insert-space
+          <el-button
+            class="button"
+            type="primary"
+            auto-insert-space
+            @click="login"
             >登录</el-button
           >
         </el-form-item>
