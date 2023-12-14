@@ -1,4 +1,6 @@
 import request from '@/utils/request'
+// 获取登录信息
+export const userGetInfoService = () => request.get('/user/userInfo')
 // 登录
 export const userLoginService = ({ username, password }) => {
   return request.post(

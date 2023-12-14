@@ -10,6 +10,52 @@ import {
   CaretBottom
 } from '@element-plus/icons-vue'
 import avatar from '@/assets/default.png'
+import { useUserStore } from '@/stores'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const userStore = useUserStore()
+onMounted(() => {
+  userStore.getUser()
+})
+// 点击下拉菜单触发
+const handleCommand = async (key) => {
+  // 只要不是退出登录就是切换路由
+  if (key === 'logout') {
+    // 提示
+    console.log(userStore.user.username)
+    await ElMessageBox.confirm(
+      (userStore.user.nickname || userStore.user.username) + '您确认退出吗?',
+      '退出登录',
+      {
+        confirmButtonText: '确认',
+        cancelButtonText: '取消',
+        type: 'warning',
+        draggable: true,
+        center: true
+      }
+    )
+      .then(() => {
+        ElMessage({
+          type: 'success',
+          message: '退出账号'
+        })
+        // 清空相关数据
+        userStore.setToken('')
+        userStore.setUser({})
+        // 跳转到登录页面
+        router.push('/login')
+      })
+      .catch(() => {
+        ElMessage({
+          type: 'success',
+          message: '取消登出'
+        })
+      })
+  } else {
+    router.push(`/user/${key}`)
+  }
+}
 </script>
 <template>
   <el-container class="layout-container">
@@ -52,10 +98,18 @@ import avatar from '@/assets/default.png'
     </el-aside>
     <el-container>
       <el-header>
-        <div>黑马程序员：<strong>小帅鹏</strong></div>
-        <el-dropdown placement="bottom-end">
+        <div>
+          当前用户：<strong>{{
+            userStore.user.nickname || userStore.user.username
+          }}</strong>
+        </div>
+        <el-dropdown
+          placement="bottom-end"
+          @command="handleCommand"
+          trigger="click"
+        >
           <span class="el-dropdown__box">
-            <el-avatar :src="avatar" />
+            <el-avatar :src="userStore.user.user_pic || avatar" />
             <el-icon><CaretBottom /></el-icon>
           </span>
           <template #dropdown>
