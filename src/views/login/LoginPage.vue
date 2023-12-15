@@ -26,7 +26,11 @@ const ruleForm = ref({
 const rules = {
   username: [
     { required: true, message: '请输入用户名', trigger: 'blur' },
-    { min: 5, max: 16, message: '长度在 5 到 16 个字符', trigger: 'blur' }
+    {
+      pattern: /^[a-zA-Z0-9]{5,16}$/,
+      message: '用户名必须是5-16位的字母或数字',
+      trigger: 'blur'
+    }
   ],
   password: [
     { required: true, message: '请输入密码', trigger: 'blur' },
