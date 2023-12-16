@@ -3,7 +3,7 @@ import axios from 'axios'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
 
-const baseURL = 'http://localhost:8642/big-event'
+const baseURL = 'http://192.168.1.135:8642/big-event'
 
 const instance = axios.create({
   baseURL,

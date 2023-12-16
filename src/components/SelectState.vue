@@ -5,6 +5,10 @@ defineProps({
   modelValue: {
     type: [Number, String],
     default: 0
+  },
+  isEdit: {
+    type: Boolean,
+    default: true
   }
 })
 defineEmits(['update:categoryId'])
@@ -20,7 +24,7 @@ getCategoryList()
     :modelValue="modelValue"
     @update:modelValue="$emit('update:modelValue', $event)"
   >
-    <el-option label="全部" :value="0" selected />
+    <el-option label="全部" :value="0" selected v-show="!isEdit" />
     <el-option
       v-for="item in categoryList"
       :key="item.id"

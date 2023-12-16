@@ -108,7 +108,7 @@ const handleCommand = async (key) => {
           trigger="click"
         >
           <span class="el-dropdown__box">
-            <el-avatar :src="userStore.user.user_pic || avatar" />
+            <el-avatar :src="userStore.user.userPic || avatar" />
             <el-icon><CaretBottom /></el-icon>
           </span>
           <template #dropdown>

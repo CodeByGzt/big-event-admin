@@ -37,8 +37,18 @@ const handleReset = () => {
   }
   getArticleList()
 }
+const articleEdit = ref()
 const onEditArticle = (row) => {
-  console.log(row.id)
+  articleEdit.value.open(row)
+}
+// 添加修改成功
+const onSuccess = (type) => {
+  if (type === 'add') {
+    // 如果是添加，需要跳转渲染最后一页，编辑直接渲染当前页
+    const lastPage = Math.ceil((totalPage.value + 1) / queryPage.value.pageSize)
+    queryPage.value.pageNum = lastPage
+  }
+  getArticleList()
 }
 const onDeleteArticle = async (row) => {
   await ElMessageBox.confirm('您确认删除这篇文章吗？', '删除文章', {
@@ -67,12 +77,15 @@ const onDeleteArticle = async (row) => {
 <template>
   <PageContainer title="文章管理">
     <template #extra>
-      <el-button type="primary">新增文章</el-button>
+      <el-button type="primary" @click="onEditArticle">新增文章</el-button>
     </template>
     <!-- 条件查询框 -->
     <el-form inline>
       <el-form-item label="文章分类：" size="small">
-        <SelectState v-model="queryItem.categoryId"></SelectState>
+        <SelectState
+          v-model="queryItem.categoryId"
+          isEdit="false"
+        ></SelectState>
       </el-form-item>
       <el-form-item label="发布状态：" size="small">
         <el-select size="small" v-model="queryItem.state">
@@ -91,7 +104,13 @@ const onDeleteArticle = async (row) => {
     <el-table :data="articleList" style="width: 100%" size="small">
       <el-table-column label="文章标题" width="250" align="left">
         <template #default="{ row }">
-          <el-link type="primary" :underline="false">{{ row.title }}</el-link>
+          <el-link
+            type="primary"
+            :underline="false"
+            href="https://sleepduck.site/"
+            target="_blank"
+            >{{ row.title }}</el-link
+          >
         </template>
       </el-table-column>
       <el-table-column prop="" label="文章封面" align="center">
@@ -103,7 +122,7 @@ const onDeleteArticle = async (row) => {
           />
         </template>
       </el-table-column>
-      <el-table-column prop="categoryId" label="分类" align="center" />
+      <el-table-column prop="categoryName" label="分类" align="center" />
       <el-table-column prop="state" label="文章状态" align="center" />
       <el-table-column
         prop="createTime"
@@ -145,6 +164,7 @@ const onDeleteArticle = async (row) => {
       layout="total, sizes, prev, pager, next, jumper"
       :total="totalPage"
     />
+    <ArticleEdit ref="articleEdit" @refresh="onSuccess"></ArticleEdit>
   </PageContainer>
 </template>
 <style scoped>
