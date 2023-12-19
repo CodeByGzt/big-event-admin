@@ -2,8 +2,8 @@ import { useUserStore } from '@/stores'
 import axios from 'axios'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
-
-const baseURL = 'http://192.168.1.135:8642/big-event'
+// 自己后端服务的ip+端口
+const baseURL = 'http://{}/big-event'
 
 const instance = axios.create({
   baseURL,
@@ -31,7 +31,7 @@ instance.interceptors.response.use(
   },
   (err) => {
     ElMessage({
-      message: err.response.data.msg || '服务异常',
+      message: err.response?.data.msg || '服务异常',
       type: 'error'
     })
     if (err.response?.status === 401) {

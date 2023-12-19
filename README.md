@@ -1,14 +1,6 @@
-# big-event-admin
+# 大事件前端
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+本项目的技术栈 本项目技术栈基于 ES6、vue3、pinia、vue-router 、vite 、axios 和 element-plus
 
 ## Project Setup
 
@@ -28,8 +20,26 @@ pnpm dev
 pnpm build
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## 项目展示
 
-```sh
-pnpm lint
-```
+![image-20231218222807972](E:\code_work\github\big-event-admin\assets\image-20231218222807972.png)
+
+
+
+![image-20231219135154457](E:\code_work\github\big-event-admin\assets\image-20231219135154457.png)
+
+
+
+
+
+![image-20231219135122215](E:\code_work\github\big-event-admin\assets\image-20231219135122215.png)
+
+
+
+![image-20231219135139336](E:\code_work\github\big-event-admin\assets\image-20231219135139336.png)
+
+
+
+## 后端地址
+
+[CodeByGzt/big_event: 大事件后台 (github.com)](https://github.com/CodeByGzt/big_event)

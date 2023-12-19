@@ -39,7 +39,6 @@ const open = async (row) => {
   if (row.id) {
     formModel.value = { ...row }
   } else {
-    console.log('添加功能')
     if (editorRef.value != undefined) {
       editorRef.value.setHTML('')
     }
@@ -95,6 +94,7 @@ defineExpose({
         <SelectState
           v-model="formModel.categoryId"
           style="width: 100%"
+          isEdit="true"
         ></SelectState>
       </el-form-item>
       <el-form-item label="文章封面" prop="cover_img"
