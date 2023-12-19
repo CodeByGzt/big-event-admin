@@ -22,7 +22,7 @@ pnpm build
 
 ## 项目展示
 
-![image-20231218222807972](E:\code_work\github\big-event-admin\assets\image-20231218222807972.png)
+![image-20231218222807972](https://github.com/CodeByGzt/big-event-admin/tree/main/assets/image-20231218222807972.png)
 
 
 
