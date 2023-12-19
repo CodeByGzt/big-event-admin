@@ -22,22 +22,21 @@ pnpm build
 
 ## 项目展示
 
-![image-20231218222807972](https://github.com/CodeByGzt/big-event-admin/tree/main/assets/image-20231218222807972.png)
+![image-20231218222807972](https://github.com/CodeByGzt/big-event-admin/raw/main/assets/image-20231218222807972.png)
 
 
 
-![image-20231219135154457](E:\code_work\github\big-event-admin\assets\image-20231219135154457.png)
+![image-20231219135154457](https://github.com/CodeByGzt/big-event-admin/raw/main/assets/image-20231219135154457.png)
 
 
 
 
 
-![image-20231219135122215](E:\code_work\github\big-event-admin\assets\image-20231219135122215.png)
+![image-20231219135122215](https://github.com/CodeByGzt/big-event-admin/raw/main/assets/image-20231219135122215.png)
 
 
 
-![image-20231219135139336](E:\code_work\github\big-event-admin\assets\image-20231219135139336.png)
-
+![image-20231219135139336](https://github.com/CodeByGzt/big-event-admin/raw/main/assets/image-20231219135139336.png)
 
 
 ## 后端地址
